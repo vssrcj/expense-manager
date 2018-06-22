@@ -6,7 +6,6 @@ module.exports = async function setup() {
       const row = await store.get("SELECT name FROM sqlite_master WHERE type='table' AND name='user'");
 
       if (row) {
-         console.log('Database already initialized.');
          return;
       }
 
@@ -32,7 +31,7 @@ module.exports = async function setup() {
          )
       `);
 
-      console.log('Created user and expense tables.');
+      console.log('Setup database with user and expense tables.');
 
       await createUser({ name: 'admin', password: 'admin', role: 'admin' });
    } catch (err) {

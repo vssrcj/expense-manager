@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-
+const { SERVER_SECRET } = require('./config');
 const { getUser } = require('./store/user-store');
 
 module.exports = async function (req, res, next) {
@@ -8,7 +8,7 @@ module.exports = async function (req, res, next) {
    try {
       const [type, token] = headers.authorization.split(' ');
       if (type === 'jwt') {
-         const decode = await jwt.verify(token, 'RESTFULAPIs');
+         const decode = await jwt.verify(token, SERVER_SECRET);
 
          const user = await getUser(decode);
 
@@ -19,6 +19,6 @@ module.exports = async function (req, res, next) {
       }
       return res.status(401).send('Unauthorized');
    } catch (err) {
-      return res.status(401).send('Unauthorized');
+      return res.status(401).send(err.message || 'Unauthorized');
    }
 };

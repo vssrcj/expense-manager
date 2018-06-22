@@ -2,6 +2,9 @@ const jwt = require('jsonwebtoken');
 const { SERVER_SECRET } = require('./config');
 const { getUser } = require('./store/user-store');
 
+/**
+ * Obtains the jwt token, and validates it against the user's id (obtained from the database).
+ */
 module.exports = async function (req, res, next) {
    const { headers } = req;
 

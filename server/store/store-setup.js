@@ -4,7 +4,7 @@ const { createUser } = require('./user-store');
 module.exports = async function setup() {
    try {
       const row = await store.get("SELECT name FROM sqlite_master WHERE type='table' AND name='user'");
-      console.log(row);
+
       if (row) {
          console.log('Database already initialized.');
          return;
